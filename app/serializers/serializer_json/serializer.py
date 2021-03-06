@@ -1,4 +1,7 @@
-class JsonSerializer:
+from app.serializers.serializer_abstact_base.serializer import BaseSerializer
+
+
+class JsonSerializer(BaseSerializer):
     def __init__(self):
         pass
 

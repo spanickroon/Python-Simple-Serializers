@@ -1,10 +1,16 @@
+from app.serializers.serializer_json.serializer import JsonSerializer
+from app.serializers.serializer_pickle.serializer import PickleSerializer
+from app.serializers.serializer_toml.serializer import TomlSerializer
+from app.serializers.serializer_yaml.serializer import YamlSerializer
+
+
 class ObjectSerializeFactory:
     def __init__(self):
         self._serialize_creators = {
-            'json': 1,
-            'pickle': 1,
-            'toml': 1,
-            'yaml': 1,
+            'json': JsonSerializer(),
+            'pickle': PickleSerializer(),
+            'toml': TomlSerializer(),
+            'yaml': YamlSerializer(),
         }
 
     def create_serializer(self, format_serialize: str):

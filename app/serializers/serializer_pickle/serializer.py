@@ -1,4 +1,7 @@
-class PickleSerializer:
+from app.serializers.serializer_abstact_base.serializer import BaseSerializer
+
+
+class PickleSerializer(BaseSerializer):
     def __init__(self):
         pass
 
