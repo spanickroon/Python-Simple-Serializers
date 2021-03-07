@@ -17,4 +17,4 @@ class ObjectSerializeFactory:
         if format_serialize in self._serialize_creators:
             return self._serialize_creators[format_serialize]
         else:
-            raise ValueError
+            raise ValueError(f'{format_serialize} argument not found')
