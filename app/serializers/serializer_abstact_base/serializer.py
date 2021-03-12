@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from app.services.service_abstract_base.service import BaseService
 
 
 class BaseSerializer(ABC):

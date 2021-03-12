@@ -1,4 +1,5 @@
 import json
+import os
 
 from app.services.service_abstract_base.service import BaseService
 
@@ -34,8 +35,18 @@ class JsonService(BaseService):
             'base64': cls.getting_base64_pickle_object(serialize_object)
         }
 
-        return json.dumps(json_template, indent=4)
+        return json_template
 
     @classmethod
     def deserialize_data(cls, json_object):
-        return cls.getting_object_from_base64(json.loads(json_object).get('base64'))
+        return cls.getting_object_from_base64(json_object.get('base64'))
+
+    @classmethod
+    def write_to_json_file(cls, serialize_object, file_path):
+        with open(file_path, 'w+') as wf:
+            json.dump(serialize_object, wf, indent=4)
+
+    @classmethod
+    def read_from_json_file(cls, file_path):
+        with open(file_path, 'r') as rf:
+            return json.load(rf)

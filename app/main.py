@@ -31,6 +31,12 @@ def main():
     test_func_2 = serializer.loads(test_func)
     print(test_func_2(10, 20))
 
+    serializer.dump(test, 'kek.json')
+
+    test_func_3 = serializer.load('kek.json')
+    print(test_func_3)
+    print(test_func_3(50, 20))
+
 
 if __name__ == '__main__':
     main()
