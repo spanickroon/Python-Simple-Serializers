@@ -11,10 +11,10 @@ class JsonSerializer(BaseSerializer):
         pass
 
     def dumps(self, serialize_object):
-        return JsonService.serialize_data_type_relative(serialize_object)
+        return JsonService.serialize_data(serialize_object)
 
     def load(self, file_path):
         pass
 
     def loads(self, serialize_string):
-        pass
+        return JsonService.deserialize_data(serialize_string)

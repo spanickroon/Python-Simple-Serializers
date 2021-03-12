@@ -1,7 +1,4 @@
 import json
-import base64
-import inspect
-import pickle
 
 from app.services.service_abstract_base.service import BaseService
 
@@ -13,54 +10,32 @@ class JsonService(BaseService):
         return super().defining_type_object(serialize_object)
 
     @classmethod
-    def serialize_data_type_relative(cls, serialize_object):
+    def _check_serializable(cls, serialize_object):
+        try:
+            json.dumps(serialize_object)
+            return True
+        except TypeError:
+            return False
+
+    @classmethod
+    def serialize_data(cls, serialize_object):
         serialize_object_type = cls.defining_type_object(serialize_object)
-
-        if serialize_object_type == 'class':
-            return cls._json_serialize_class(serialize_object)
-        elif serialize_object_type == 'function':
-            return cls._json_serialize_function(serialize_object)
-        else:
-            return cls._json_serialize_object(serialize_object)
-
-    @classmethod
-    def _json_serialize_object(cls, serialize_object):
-        return json.dumps(serialize_object, indent=4)
-
-    @classmethod
-    def _json_serialize_function(cls, serialize_object):
-        list_type_args = [
-            'args', 'varargs', 'varkw', 'defaults',
-            'kwonlyargs', 'kwonlydefaults', 'annotations',
-        ]
+        serializable_by_default = cls._check_serializable(serialize_object)
 
         json_template = {
             'object': repr(serialize_object),
-            'type': 'function',
-            'name': serialize_object.__name__,
-            'args': {
-                arg_name: args for (
-                    arg_name, args
-                ) in zip(
-                    list_type_args,
-                    inspect.getfullargspec(serialize_object)
-                )
-            },
-            'code': inspect.getsource(serialize_object).split('\n'),
-            'base64': base64.b64encode(pickle.dumps(serialize_object)).decode('ascii')
+            'type': serialize_object_type,
+            'serializable_by_default': serializable_by_default,
+            'name': cls.getting_name_object(serialize_object),
+            'value': serialize_object if serializable_by_default else None,
+            'dict_class': cls.getting_class_dict(serialize_object),
+            'args': cls.getting_function_arguments(serialize_object),
+            'code': cls.getting_source_code(serialize_object),
+            'base64': cls.getting_base64_pickle_object(serialize_object)
         }
 
         return json.dumps(json_template, indent=4)
 
     @classmethod
-    def _json_serialize_class(cls, serialize_object):
-        json_template = {
-            'object': repr(serialize_object),
-            'type': 'class',
-            'name': serialize_object.__name__,
-            'code': inspect.getsource(serialize_object).split('\n'),
-            'dict_class': {k: str(v) for k, v in serialize_object.__dict__.items()},
-            'base64': base64.b64encode(pickle.dumps(serialize_object)).decode('ascii')
-        }
-
-        return json.dumps(json_template, indent=4)
+    def deserialize_data(cls, json_object):
+        return cls.getting_object_from_base64(json.loads(json_object).get('base64'))
