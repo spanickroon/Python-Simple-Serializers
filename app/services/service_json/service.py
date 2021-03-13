@@ -1,5 +1,4 @@
 import json
-import os
 
 from app.services.service_abstract_base.service import BaseService
 
