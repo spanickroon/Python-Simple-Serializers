@@ -39,6 +39,7 @@ def main():
     print(test_func_3(50, 20))
     """
 
+    """
     serializer = factory.create_serializer('pickle')
 
     test_func = serializer.dumps(test)
@@ -52,11 +53,33 @@ def main():
     test_func_2 = serializer.loads(test_func)
     print(test_func_2(10, 20))
 
-    serializer.dump(test, 'kek.picdkldfgdfgdfgdfgdfgfdge')
+    serializer.dump(test, 'kek.pickle')
 
     test_func_3 = serializer.load('kek.pickle')
     print(test_func_3)
     print(test_func_3(50, 20))
+    
+    """
+
+    serializer = factory.create_serializer('yaml')
+
+    test_func = serializer.dumps(test)
+    print(test_func)
+    print(serializer.dumps(ClassTest))
+    print(serializer.dumps((i for i in range(10))))
+    print(serializer.dumps([1, 2, 3, 4, 5]))
+    print(serializer.dumps({1, 2, 3, 4, 5}))
+    print(serializer.dumps(10))
+
+    test_func_2 = serializer.loads(test_func)
+    print(test_func_2(10, 20))
+
+    serializer.dump(test, 'kek.yaml')
+
+    test_func_3 = serializer.load('kek.yaml')
+    print(test_func_3)
+    print(test_func_3(50, 20))
+
 
 if __name__ == '__main__':
     main()
