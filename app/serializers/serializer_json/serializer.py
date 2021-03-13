@@ -10,16 +10,27 @@ class JsonSerializer(BaseSerializer):
         pass
 
     def dump(self, serialize_object, file_path):
-        JsonService.write_to_json_file(JsonService.serialize_data(serialize_object), file_path)
+        try:
+            JsonService.write_to_json_file(JsonService.serialize_data(serialize_object), file_path)
+        except TypeError:
+            pass
 
     def dumps(self, serialize_object):
-        return json.dumps(JsonService.serialize_data(serialize_object), indent=4)
+        try:
+            return json.dumps(JsonService.serialize_data(serialize_object), indent=4)
+        except TypeError:
+            return None
 
     def load(self, file_path):
         try:
             return JsonService.deserialize_data(JsonService.read_from_json_file(file_path))
-        except FileNotFoundError as exc:
-            return f'{exc.strerror} {exc.filename}'
+        except FileNotFoundError:
+            return None
+        except TypeError:
+            return None
 
     def loads(self, serialize_string):
-        return JsonService.deserialize_data(json.loads(serialize_string))
+        try:
+            return JsonService.deserialize_data(json.loads(serialize_string))
+        except TypeError:
+            return None

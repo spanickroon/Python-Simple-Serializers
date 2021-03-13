@@ -1,8 +1,7 @@
-import json
 import yaml
 
 from app.services.service_abstract_base.service import BaseService
-from app.services.service_json.service import  JsonService
+from app.services.service_json.service import JsonService
 
 
 class YamlService(BaseService):
@@ -10,14 +9,6 @@ class YamlService(BaseService):
     @classmethod
     def defining_type_object(cls, serialize_object):
         return super().defining_type_object(serialize_object)
-
-    @classmethod
-    def _check_serializable(cls, serialize_object):
-        try:
-            json.dumps(serialize_object)
-            return True
-        except TypeError:
-            return False
 
     @classmethod
     def serialize_data(cls, serialize_object):
