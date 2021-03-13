@@ -130,3 +130,8 @@ dmypy.json
 
 # PyCharm
 .idea
+
+# SetUP
+build
+dist
+*.egg-info
