@@ -1,7 +1,7 @@
 import toml
 
-from app.serializers.serializer_abstact_base.serializer import BaseSerializer
-from app.services.service_toml.service import TomlService
+from formatserializer.serializers.serializer_abstact_base.serializer import BaseSerializer
+from formatserializer.services.service_toml.service import TomlService
 
 
 class TomlSerializer(BaseSerializer):

@@ -1,8 +1,8 @@
 
 
-from app.serializers.serializer_abstact_base.serializer import BaseSerializer
+from formatserializer.serializers.serializer_abstact_base.serializer import BaseSerializer
 
-from app.services.service_pickle.service import PickleService
+from formatserializer.services.service_pickle.service import PickleService
 
 
 class PickleSerializer(BaseSerializer):

@@ -1,8 +1,8 @@
 #!.venv/bin/python3
-from app.serializers.serializer_factory.factory import ObjectSerializeFactory
-from app.args.arguments import SerializeArguments
+from formatserializer.serializers.serializer_factory.factory import ObjectSerializeFactory
+from formatserializer.args.arguments import SerializeArguments
 
-from static.test_data import test_data
+import test_startapp
 
 
 def main():
@@ -17,8 +17,8 @@ def main():
 
     serialize = factory.create_serializer(serialize_format)
 
-    print(serialize.dumps(test_data.MyClass))
-    serialize.dump(test_data.my_func, file_to_convert)
+    print(serialize.dumps(test_startapp.MyClass))
+    serialize.dump(test_startapp.my_func, file_to_convert)
 
     test_func = serialize.load(file_from_convert)
 

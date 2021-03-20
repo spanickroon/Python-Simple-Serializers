@@ -1,6 +1,6 @@
 import json
 
-from app.services.service_abstract_base.service import BaseService
+from formatserializer.services.service_abstract_base.service import BaseService
 
 
 class JsonService(BaseService):

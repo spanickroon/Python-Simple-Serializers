@@ -1,7 +1,7 @@
 import yaml
 
-from app.serializers.serializer_abstact_base.serializer import BaseSerializer
-from app.services.service_yaml.service import YamlService
+from formatserializer.serializers.serializer_abstact_base.serializer import BaseSerializer
+from formatserializer.services.service_yaml.service import YamlService
 
 
 class YamlSerializer(BaseSerializer):

@@ -1,7 +1,7 @@
-from app.serializers.serializer_json.serializer import JsonSerializer
-from app.serializers.serializer_pickle.serializer import PickleSerializer
-from app.serializers.serializer_toml.serializer import TomlSerializer
-from app.serializers.serializer_yaml.serializer import YamlSerializer
+from formatserializer.serializers.serializer_json.serializer import JsonSerializer
+from formatserializer.serializers.serializer_pickle.serializer import PickleSerializer
+from formatserializer.serializers.serializer_toml.serializer import TomlSerializer
+from formatserializer.serializers.serializer_yaml.serializer import YamlSerializer
 
 
 class ObjectSerializeFactory:

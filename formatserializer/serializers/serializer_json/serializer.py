@@ -1,8 +1,8 @@
 import json
 
-from app.serializers.serializer_abstact_base.serializer import BaseSerializer
+from formatserializer.serializers.serializer_abstact_base.serializer import BaseSerializer
 
-from app.services.service_json.service import JsonService
+from formatserializer.services.service_json.service import JsonService
 
 
 class JsonSerializer(BaseSerializer):
