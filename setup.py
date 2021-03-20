@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding="utf-8") as rf:
 
 setuptools.setup(
     name='simple-serializer-NIKITA-KOZNEV',
-    version='1.0.2',
+    version='1.0.6',
     author='Nikita Koznev',
     author_email='nikitakoznev@gmail.com',
     description='Python Simple Serializer',
@@ -21,7 +21,7 @@ setuptools.setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    packages=['formatserializer', 'formatserializer.tests', 'formatserializer.testing'],
+    packages=setuptools.find_packages(),
     python_requires=">=3.8",
     install_requires=[
         'PyYAML==5.4.1',
