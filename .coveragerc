@@ -4,3 +4,5 @@ omit =
     static/*
     tests/*
     */__init__.py
+    startapp.py
+    test_startapp.py
