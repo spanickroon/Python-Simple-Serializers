@@ -13,7 +13,7 @@ class TomlSerializer(BaseSerializer):
 
     def dump(self, serialize_object, file_path):
         try:
-            TomlService.write_to_yaml_file(serialize_object, file_path)
+            TomlService.write_to_toml_file(serialize_object, file_path)
         except TypeError:
             pass
 
@@ -25,7 +25,7 @@ class TomlSerializer(BaseSerializer):
 
     def load(self, file_path):
         try:
-            return TomlService.deserialize_data(TomlService.read_from_yaml_file(file_path))
+            return TomlService.deserialize_data(TomlService.read_from_toml_file(file_path))
         except FileNotFoundError:
             return None
         except TypeError:

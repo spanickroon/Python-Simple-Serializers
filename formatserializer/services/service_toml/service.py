@@ -20,12 +20,12 @@ class TomlService(BaseService):
         return cls.getting_object_from_base64(json_object.get('base64'))
 
     @classmethod
-    def write_to_yaml_file(cls, serialize_object, file_path):
+    def write_to_toml_file(cls, serialize_object, file_path):
         json_template = JsonService.serialize_data(serialize_object)
         with open(file_path, 'w+') as wf:
             toml.dump(json_template, wf)
 
     @classmethod
-    def read_from_yaml_file(cls, file_path):
+    def read_from_toml_file(cls, file_path):
         with open(file_path, 'r') as rf:
             return toml.load(rf)
