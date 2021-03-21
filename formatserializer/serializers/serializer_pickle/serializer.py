@@ -1,4 +1,4 @@
-
+import uuid
 
 from formatserializer.serializers.serializer_abstact_base.serializer import BaseSerializer
 
@@ -6,6 +6,8 @@ from formatserializer.services.service_pickle.service import PickleService
 
 
 class PickleSerializer(BaseSerializer):
+    class_id = uuid.uuid4()
+
     def __init__(self):
         pass
 

@@ -1,10 +1,13 @@
 import toml
+import uuid
 
 from formatserializer.serializers.serializer_abstact_base.serializer import BaseSerializer
 from formatserializer.services.service_toml.service import TomlService
 
 
 class TomlSerializer(BaseSerializer):
+    class_id = uuid.uuid4()
+
     def __init__(self):
         pass
 

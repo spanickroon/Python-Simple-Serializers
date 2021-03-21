@@ -65,5 +65,5 @@ class BaseService(ABC):
     def getting_object_from_base64(cls, base64_object):
         try:
             return pickle.loads(base64.b64decode(base64_object.encode('ascii')))
-        except TypeError:
+        except AttributeError:
             return None
