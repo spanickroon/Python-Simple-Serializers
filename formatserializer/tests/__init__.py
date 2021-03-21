@@ -1,5 +1,6 @@
 from .serializers.serializer_factory.test_factory import ObjectSerializeFactoryTestCase
 from .serializers.serialize_json.test_serialize import JsonSerializerTestCase
+from .serializers.serialize_pickle.test_pickle import PickleSerializerTestCase
 
 from .services.service_abstract_base.test_service import BaseServiceTestCase
 from .services.service_json.test_service import JsonServiceTestCase
