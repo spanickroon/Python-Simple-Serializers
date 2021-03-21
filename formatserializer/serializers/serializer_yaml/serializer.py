@@ -34,5 +34,5 @@ class YamlSerializer(BaseSerializer):
     def loads(self, serialize_string):
         try:
             return YamlService.deserialize_data(yaml.load(serialize_string, Loader=yaml.Loader))
-        except TypeError:
+        except AttributeError:
             return None
