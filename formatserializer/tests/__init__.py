@@ -5,3 +5,5 @@ from .services.service_json.test_service import JsonServiceTestCase
 from .services.service_pickle.test_service import PickleServiceTestCase
 from .services.service_toml.test_service import TomlServiceTestCase
 from .services.service_yaml.test_service import YamlServiceTestCase
+
+from .args.test_arguments import SerializeArgumentsTestCase

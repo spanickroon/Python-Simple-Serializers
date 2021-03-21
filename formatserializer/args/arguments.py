@@ -46,7 +46,6 @@ class SerializeArguments:
         try:
             with open(parser.config_file, 'r') as rf:
                 config_dict = json.load(rf)
-
                 if len(config_dict) != 3 or \
                         not config_dict['serialize_format'] or \
                         not config_dict['file_to_convert'] or \
