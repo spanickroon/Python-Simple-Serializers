@@ -1,8 +1,8 @@
 [run]
 omit =
     .venv/*
+    */__init__.py
     formatserializer/tests/*
     formatserializer/testing/*
-    */__init__.py
     startapp.py
     test_startapp.py
