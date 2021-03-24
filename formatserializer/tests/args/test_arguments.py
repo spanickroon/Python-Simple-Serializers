@@ -1,44 +1,58 @@
-from unittest import TestCase, mock
-from parameterized import parameterized
+import json
 
+from unittest import TestCase, mock
 from argparse import Namespace
 
-from formatserializer.args.arguments import SerializeArguments
+from formatserializer.args.arguments import ConvertArguments
 
 
 class SerializeArgumentsTestCase(TestCase):
     def setUp(self) -> None:
-        self.parser = SerializeArguments()
-        self.parser_class = SerializeArguments
+        self.parser = ConvertArguments()
+        self.parser_class = ConvertArguments
         self.parsing_config_file = self.parser_class.parsing_config_file
 
     def test__setup_args__success(self):
         expected_result = Namespace(
             config_file=None,
-            file_from_convert='test',
-            file_to_convert='test',
-            store='json'
+            convert_format=None,
+            file_from_convert=None,
+            file_to_convert=None,
         )
 
         actual_result = self.parser.setup_args()
 
         self.assertEqual(actual_result, expected_result)
 
-    def test__check_config_file__success(self):
-        actual_result = self.parser_class.check_config_file(self.parser.setup_args())
+    def test__parsing_config_file_with_not_file__success(self):
+        parser = self.parser.setup_args()
+        self.parser_class.parsing_config_file(parser)
 
-        self.assertFalse(actual_result)
+        expected_result = Namespace(
+            config_file=None,
+            convert_format=None,
+            file_from_convert=None,
+            file_to_convert=None,
+        )
 
-    @parameterized.expand([
-        ("check_config_true", True, True),
-        ("check_config_false", False, True),
-        ("not_parser_object", True, False)
-    ])
-    def test__distribution_arguments__success(self, _, check_config, is_parser):
-        self.parser_class.check_config_file = mock.MagicMock(return_value=check_config)
-        self.parser_class.parsing_config_file = mock.MagicMock(return_value=('json', 'test', 'test'))
+        self.assertEqual(parser, expected_result)
 
-        parser = self.parser.setup_args() if is_parser else None
-        actual_result = self.parser_class.distribution_arguments(parser)
+    @mock.patch('builtins.open', mock.mock_open(read_data=json.dumps({
+      'convert_format': 'toml',
+      'file_to_convert': 'test.toml',
+      'file_from_convert': 'test.json'
+    })))
+    def test__parsing_config_file__success(self):
+        parser = self.parser.setup_args()
+        parser.config_file = 'test_config.json'
 
-        self.assertTupleEqual(actual_result, ('json', 'test', 'test'))
+        self.parser_class.parsing_config_file(parser)
+
+        expected_result = Namespace(
+            config_file='test_config.json',
+            convert_format='toml',
+            file_from_convert='test.json',
+            file_to_convert='test.toml',
+        )
+
+        self.assertEqual(parser, expected_result)

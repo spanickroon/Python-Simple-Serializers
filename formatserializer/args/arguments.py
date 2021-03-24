@@ -2,7 +2,7 @@ import argparse
 import json
 
 
-class SerializeArguments:
+class ConvertArguments:
     def __init__(self):
         self.parser = argparse.ArgumentParser(description='Serialize args')
 
@@ -14,54 +14,37 @@ class SerializeArguments:
         )
 
         self.parser.add_argument(
-            '--serialize_format',
-            dest='store',
+            '--convert_format',
             choices=['json', 'pickle', 'yaml', 'toml'],
-            help='Data serialization format json by default',
-            default='json',
+            help='Data convert format json by default',
         )
 
         self.parser.add_argument(
             '--file_to_convert',
             type=str,
             help='The file where the serialization data will be sent',
-            default='test'
         )
 
         self.parser.add_argument(
             '--file_from_convert',
             type=str,
             help='The file from which the data for serialization will be taken',
-            default='test'
         )
 
         return self.parser.parse_args()
 
-    @classmethod
-    def check_config_file(cls, parser):
-        return parser.config_file is not None
+    @staticmethod
+    def parsing_config_file(parser):
+        if not parser.config_file:
+            return
 
-    @classmethod
-    def parsing_config_file(cls, parser):
         try:
             with open(parser.config_file, 'r') as rf:
                 config_dict = json.load(rf)
-                if len(config_dict) != 3 or \
-                        not config_dict['serialize_format'] or \
-                        not config_dict['file_to_convert'] or \
-                        not config_dict['file_from_convert']:
-                    raise KeyError
 
-                return config_dict.values()
+                parser.convert_format = config_dict['convert_format']
+                parser.file_from_convert = config_dict['file_from_convert']
+                parser.file_to_convert = config_dict['file_to_convert']
+
         except (FileNotFoundError, KeyError, json.decoder.JSONDecodeError):
-            return None
-
-    @classmethod
-    def distribution_arguments(cls, parser):
-        try:
-            if cls.check_config_file(parser):
-                return cls.parsing_config_file(parser)
-            else:
-                return parser.serialize_format, parser.file_to_convert, parser.file_from_convert
-        except AttributeError:
-            return 'json', 'test', 'test'
+            print("Invalid config file")

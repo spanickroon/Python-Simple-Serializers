@@ -1,19 +1,13 @@
-#!.venv/bin/python3
 from formatserializer.serializers.serializer_factory.factory import ObjectSerializeFactory
-from formatserializer.args.arguments import SerializeArguments
 
 import test_startapp
 
 
 def main():
     factory = ObjectSerializeFactory()
-    parser = SerializeArguments().setup_args()
-
-    serialize_format, file_to_convert, file_from_convert = SerializeArguments.distribution_arguments(parser)
-    file_to_convert, file_from_convert = (
-        f'{file_to_convert}.{serialize_format}',
-        f'{file_from_convert}.{serialize_format}'
-    )
+    serialize_format = 'json'
+    file_to_convert = 'test.json'
+    file_from_convert = 'test.json'
 
     serialize = factory.create_serializer(serialize_format)
 

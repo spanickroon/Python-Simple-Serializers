@@ -28,12 +28,17 @@ Python object serializer that works in 4 formats:
     ```
 5. Run command
     ```bash
-    chmod +x startapp.py
+    chmod +x console_tool.py
     ```
 6. Check functionality
     ```bash
-    ./startapp.py --help
+    python3 startapp.py
     ```
+7. Check functionality
+    ```bash
+    ./console_tool.py --help
+    ```
+
 ---
 
 ## Testing

@@ -2,6 +2,7 @@
 omit =
     .venv/*
     */__init__.py
+    formatserializer/converters/*
     formatserializer/tests/*
     formatserializer/testing/*
     startapp.py
