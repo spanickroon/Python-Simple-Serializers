@@ -18,6 +18,12 @@ def main():
 
     print(test_func(10, 5))
 
+    a = lambda x: x + 2
+    b = serialize.dumps(a)
+
+    print(a)
+    print(b)
+
 
 if __name__ == '__main__':
     main()

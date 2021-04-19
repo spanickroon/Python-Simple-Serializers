@@ -1,6 +1,7 @@
 import inspect
 import base64
 import pickle
+import dill
 
 from abc import ABC, abstractmethod
 
@@ -57,13 +58,13 @@ class BaseService(ABC):
     @classmethod
     def getting_base64_pickle_object(cls, serialize_object):
         try:
-            return base64.b64encode(pickle.dumps(serialize_object)).decode('ascii')
+            return base64.b64encode(dill.dumps(serialize_object)).decode('ascii')
         except TypeError:
             return None
 
     @classmethod
     def getting_object_from_base64(cls, base64_object):
         try:
-            return pickle.loads(base64.b64decode(base64_object.encode('ascii')))
+            return dill.loads(base64.b64decode(base64_object.encode('ascii')))
         except AttributeError:
             return None
